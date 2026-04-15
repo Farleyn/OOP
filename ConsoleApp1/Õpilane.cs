@@ -1,39 +1,61 @@
-﻿using System;
+﻿using ConsoleApp1;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Channels;
 
 namespace ConsoleApp1
 {
-    public class Õpilane : Isik
+    public class Õpilane : Isik, ITööline
     {
-        public string Kool { get; set; } = string.Empty;
+        public string Kool { get; set; }
         public int Klass { get; set; }
-        public double KeskmineHinne { get; set; }
+        public double Keskminehinne { get; set; }
         public int Puudumised { get; set; } = 0;
-        public bool KasOnSotsTõend { get; set; } = false;
+
+        public bool SotsiaalAmet { get; set; }
+
         public TööTüüp VäljamakseTüüp { get; set; } = TööTüüp.Toetus;
+
+        public Õppevorm Staatus { get; set; } = Õppevorm.Päevane;
+
+
+
+        public override void Kirjelda()
+        {
+            Console.WriteLine($"{Nimi} õpib {Klass}. klassis. Vorm: {Staatus}");
+        }
+
 
         public void Õpi()
         {
             Console.WriteLine($"{Nimi} õpib {Kool} {Klass}. klassis.");
         }
 
-        public override void Kirjelda()
-        {
-            Console.WriteLine($"Mina olen õpilane {Nimi} ja käin {Klass}. klassis.");
-        }
+
+
+        double Põhitoestus = 0;
+        double Eritoetust = 0;
         public double ArvutaPalk()
         {
-            double põhitoetus = 0;
-            double eritoetus = 0;
+            if (Keskminehinne > 3.8F && Puudumised < 30)
+            {
+                Põhitoestus = 60;
+                Console.WriteLine("Õpilanel on põhitoetust");
 
-            if (KeskmineHinne >= 3.8 && Puudumised <= 30)
-            {
-                põhitoetus += 60;
             }
-            if (KasOnSotsTõend)
+
+            if (SotsiaalAmet)
             {
-                eritoetus += 120;
+                Eritoetust = 120;
+                Console.WriteLine("Õpilanel on eritoetust");
             }
-            return põhitoetus + eritoetus;
+            Console.WriteLine($"Õpilane palk on: {Põhitoestus + Eritoetust}");
+
+            return Põhitoestus + Eritoetust;
+
+
+
         }
     }
 }

@@ -1,25 +1,35 @@
-﻿using System;
+﻿using ConsoleApp1;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ConsoleApp1
 {
     public class Õpetaja : Isik, ITööline
     {
-        public string Aine { get; set; } = string.Empty;
-        public double Tunnitasu { get; set; }
-        public int TunnidKuus { get; set; }
+        public string Aine { get; set; }
 
+        public double Tunnitasu { get; set; }
+
+        public int Tunnidkuus { get; set; }
+
+        public TööTüüp VäljamakseTüüp { get; set; } = TööTüüp.Palk;
+
+        public override void Kirjelda()
+        {
+            Console.WriteLine($"Mina olen õpetaja {Nimi} ja ma õpetan: {Aine}.");
+        }
         public void Õpeta()
         {
             Console.WriteLine($"{Nimi} õpetab ainet: {Aine}.");
         }
 
-        public override void Kirjelda()
-        {
-            Console.WriteLine($"Mina olen õpetaja {Nimi} ja õpetan ainet {Aine}.");
-        }
         public double ArvutaPalk()
         {
-            return Tunnitasu * TunnidKuus;
+            Console.WriteLine($"Õpetaja palk on: {Tunnitasu * Tunnidkuus}");
+            return Tunnitasu * Tunnidkuus;
         }
+
+
     }
 }

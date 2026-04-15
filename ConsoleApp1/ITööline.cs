@@ -1,15 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace ConsoleApp1
 {
     public enum TööTüüp
     {
-        Palk, 
+        Palk,
         Toetus
     }
-    public interface ITööline
+
+    public enum Õppevorm
+    {
+        Päevane,
+        Kaugõpe,
+        Ekstern,
+        AkadeemilinePuhkus
+    }
+    internal interface ITööline
     {
         TööTüüp VäljamakseTüüp { get; set; }
         double ArvutaPalk();
+
     }
 }
